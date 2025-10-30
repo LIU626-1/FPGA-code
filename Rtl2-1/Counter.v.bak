@@ -1,0 +1,28 @@
+module  counter
+#(
+parameter T=27'b101111101011110000100000000
+)
+(
+input sys_clk,
+input sys_rst_n,
+output led_out,
+);
+reg [26:0] cnt;
+
+always @(posedge sys_clk)
+  if (sys_rst_n == 1'b0) 
+  begin
+    cnt<=27'b0;
+    led_out <= 1'b0;
+  end
+  else
+  begin
+    if (cnt<T)
+	 begin
+	   cnt <=cnt+1'b1;
+    end
+	 else
+	   cnt <= 25'b0;
+      led_out<=~led_out;
+  end
+endmodule

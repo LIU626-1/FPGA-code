@@ -1,0 +1,17 @@
+`timescale 1ns/1ns
+module tb_Counter();
+reg sys_clk;
+reg sys_rst_n;
+reg led_out;
+
+Counter Counter_instance(
+.sys_clk(sys_clk),
+.sys_rst_n(sys_rst_n),
+.led_out(led_out)
+);
+
+initial begin
+sys_clk=1'b1;
+always #10 sys_clk=~sys_clk;
+end
+endmodule

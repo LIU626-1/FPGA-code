@@ -1,0 +1,14 @@
+module Digital_Comparator1(
+input A,
+input B,
+
+output reg led1,
+output reg led2,
+output reg led3
+);
+
+assign led1 <= (A < B);
+assign led2 <= (A = B);
+assign led3 <= (A > B);
+
+endmodule
