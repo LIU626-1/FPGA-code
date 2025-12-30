@@ -1,0 +1,315 @@
+`timescale 1ns/1ns
+module vga_pic_g(
+  input  wire        vga_clk,
+  input  wire        sys_rst_n,
+  input  wire [9:0]  pix_x,
+  input  wire [9:0]  pix_y,
+  input  wire        btn_left,    // 高=按住左（去抖后）
+  input  wire        btn_right,   // 高=按住右
+  input  wire        btn_ok,      // 高=按下
+  input  wire        btn_back,    // 高=按下
+  output reg  [15:0] pix_data,
+  output wire        game_over    // 1 表示本局结束（血空或砖块全清）
+);
+  // ===== 分辨率 & 颜色 =====
+  localparam [10:0] H_RES = 11'd640, V_RES = 11'd480;
+  localparam [10:0] H_MAX = H_RES-11'd1, V_MAX = V_RES-11'd1;
+  localparam [15:0] C_BLACK=16'h0000,
+                    C_WHITE=16'hFFFF,
+                    C_GREEN=16'h07E0,
+                    C_YEL  =16'hFFE0,
+                    C_MAG  =16'hFD20,
+                    C_RED  =16'hF800;  // 血量用红色小块显示
+
+  // ===== 挡板参数 =====
+  localparam [10:0] PAD_W=11'd80, PAD_H=11'd10, PAD_Y=V_RES-11'd30;
+  localparam [10:0] PAD_STEP = 11'd2;  // 每 tick 位移 2px
+
+  // ===== 小球（圆形）=====
+  localparam [10:0] BALL_R=11'd4;
+  localparam integer BALL_R2 = BALL_R*BALL_R;
+
+  // ===== 游戏节拍（小步引擎）=====
+  localparam integer VCLK_HZ = 25_000_000;
+  localparam integer BALL_V  = 14;
+  localparam integer GAME_HZ = 60*BALL_V;
+  localparam integer GAME_DIV= VCLK_HZ / GAME_HZ;
+
+  reg [15:0] game_div;
+  wire game_ce = (game_div == GAME_DIV-1);
+  always @(posedge vga_clk or negedge sys_rst_n) begin
+    if(!sys_rst_n) game_div <= 0;
+    else if(game_ce) game_div <= 0;
+    else game_div <= game_div + 1'b1;
+  end
+
+  // ===== 砖块 8×5（高度改为原来的 1.5 倍：18 -> 27）=====
+  localparam integer BRK_COLS=8, BRK_ROWS=5;
+  localparam [10:0] BRK_W   = 11'd64;
+  localparam [10:0] BRK_H   = 11'd27;   // ★ 原来 18，这里改为 27 ★
+  localparam [10:0] BRK_TOP = 11'd80;   // 顶部位置不变
+  localparam [10:0] BRK_TW  = 11'd512;  // 8*64
+  localparam [10:0] BRK_TH  = 11'd135;  // 5*27 = 135，整体高度增加
+  localparam [10:0] BRK_LEFT = (H_RES - BRK_TW)>>1;
+
+  // ===== 游戏状态寄存器 =====
+  reg [10:0] pad_x;
+  reg [10:0] ball_x, ball_y;
+  reg        dir_x, dir_y;          // 0=负向, 1=正向
+  reg [BRK_COLS*BRK_ROWS-1:0] brk_on;
+  reg        running;
+
+  // 三滴血 + 砖块数
+  reg [1:0] life_cnt;              // 0..3
+  reg [5:0] brick_left;            // 0..40
+
+  wire life_empty   = (life_cnt   == 2'd0);
+  wire bricks_empty = (brick_left == 6'd0);
+  assign game_over  = life_empty | bricks_empty;
+
+  localparam [10:0] PAD_X0=(H_RES-PAD_W)>>1,
+                    BALL_X0=11'd320,
+                    BALL_Y0=(V_RES>>1)+11'd20;
+
+  // ===== 圆-矩形碰撞判定 =====
+  function automatic bit circle_rect_hit;
+    input integer cx, cy;
+    input integer rx1, ry1, rx2, ry2;
+    integer px, py, dx, dy, d2;
+    begin
+      px = (cx < rx1) ? rx1 : ((cx > rx2) ? (rx2) : cx);
+      py = (cy < ry1) ? ry1 : ((cy > ry2) ? (ry2) : cy);
+      dx = cx - px; dy = cy - py; d2 = dx*dx + dy*dy;
+      circle_rect_hit = (d2 <= BALL_R2);
+    end
+  endfunction
+
+  // ===== y/BRK_H 的代替：按 27 像素一行分段 =====
+  function automatic integer row_from_y;
+    input integer y_rel; begin
+      if      (y_rel < 27)  row_from_y = 0;
+      else if (y_rel < 54)  row_from_y = 1;
+      else if (y_rel < 81)  row_from_y = 2;
+      else if (y_rel < 108) row_from_y = 3;
+      else                  row_from_y = 4;
+    end
+  endfunction
+
+  // ===== 坐标→砖块索引（无除法）=====
+  function automatic bit brick_addr;
+    input integer x, y;
+    output integer idx;
+    integer c, r, xr, yr;
+    begin
+      idx = 0;
+      brick_addr = 1'b0;
+      if( (y >= BRK_TOP) && (y < BRK_TOP+BRK_TH) &&
+          (x >= BRK_LEFT) && (x < BRK_LEFT+BRK_TW) ) begin
+        xr = x - BRK_LEFT;
+        yr = y - BRK_TOP;
+        c  = xr >> 6;
+        r  = row_from_y(yr);
+        idx = r*BRK_COLS + c;
+        brick_addr = 1'b1;
+      end
+    end
+  endfunction
+
+  // ===== OK/Back 的沿检测（锁到 game_ce）=====
+  reg ok_prev, back_prev;
+  always @(posedge vga_clk or negedge sys_rst_n) begin
+    if(!sys_rst_n) begin
+      ok_prev   <= 1'b0;
+      back_prev <= 1'b0;
+    end else if(game_ce) begin
+      ok_prev   <= btn_ok;
+      back_prev <= btn_back;
+    end
+  end
+  wire ok_pulse   = game_ce &  btn_ok   & ~ok_prev;
+  wire back_pulse = game_ce &  btn_back & ~back_prev;
+
+  // ===== 游戏主更新 =====
+  always @(posedge vga_clk or negedge sys_rst_n) begin
+    if(!sys_rst_n) begin
+      pad_x   <= PAD_X0;
+      ball_x  <= BALL_X0; ball_y <= BALL_Y0;
+      dir_x   <= 1'b1;    dir_y  <= 1'b0;
+      brk_on  <= {(BRK_COLS*BRK_ROWS){1'b1}};
+      running <= 1'b0;
+      life_cnt   <= 2'd3;          // 初始三滴血
+      brick_left <= 6'd40;         // 8×5 = 40 块砖
+    end else if(game_ce) begin
+      integer nx, ny, rx1,ry1,rx2,ry2, idx;
+      bit idx_ok;
+
+      // back：重新开始本局（生命恢复为3，砖块全恢复）
+      if(back_pulse) begin
+        pad_x   <= PAD_X0;
+        ball_x  <= BALL_X0; ball_y <= BALL_Y0;
+        dir_x   <= 1'b1;    dir_y  <= 1'b0;
+        brk_on  <= {(BRK_COLS*BRK_ROWS){1'b1}};
+        running <= 1'b0;
+        life_cnt   <= 2'd3;
+        brick_left <= 6'd40;
+      end else if(ok_pulse) begin
+        // 按 OK 开始/暂停（仅对 running 起作用）
+        if(!game_over)      // 已经 game_over 就不要再启动了
+          running <= ~running;
+      end
+
+      // 挡板移动
+      if(btn_left) begin
+        if(pad_x > PAD_STEP) pad_x <= pad_x - PAD_STEP;
+        else                 pad_x <= 11'd0;
+      end else if(btn_right) begin
+        if(pad_x + PAD_W + PAD_STEP < H_RES) pad_x <= pad_x + PAD_STEP;
+        else                                 pad_x <= H_RES - PAD_W;
+      end
+
+      if(running && !game_over) begin
+        integer bx, by;
+        bit tdx, tdy;
+        bit brick_removed;
+
+        bx = ball_x; by = ball_y;
+        tdx = dir_x; tdy = dir_y;
+        brick_removed = 1'b0;
+
+        // ===== 水平 1px =====
+        nx = tdx ? (bx + 1) : (bx - 1);
+
+        // 左右墙
+        if(nx <= BALL_R) begin
+          nx = BALL_R; tdx = 1'b1;
+        end else if(nx >= H_MAX - BALL_R) begin
+          nx = H_MAX - BALL_R; tdx = 1'b0;
+        end else begin
+          // 挡板（水平轴）
+          rx1 = pad_x; ry1 = PAD_Y; rx2 = pad_x + PAD_W; ry2 = PAD_Y + PAD_H;
+          if(circle_rect_hit(nx, by, rx1, ry1, rx2, ry2)) begin
+            tdx = ~tdx; nx = bx;
+          end else begin
+            // 砖块（水平轴）
+            idx_ok = brick_addr(nx, by, idx);
+            if(idx_ok && brk_on[idx]) begin
+              rx1 = BRK_LEFT + (((nx - BRK_LEFT) >> 6) << 6);
+              ry1 = BRK_TOP  + 27*row_from_y(by - BRK_TOP);  // ★ 18 -> 27
+              rx2 = rx1 + BRK_W; ry2 = ry1 + BRK_H;
+              if(circle_rect_hit(nx, by, rx1, ry1, rx2, ry2)) begin
+                tdx = ~tdx; nx = bx;
+                if(!brick_removed) begin
+                  brick_removed = 1'b1;
+                  brk_on[idx]   <= 1'b0;
+                  if(brick_left > 0)
+                    brick_left <= brick_left - 1'b1;
+                end
+              end
+            end
+          end
+        end
+        bx = nx;
+
+        // ===== 垂直 1px =====
+        ny = tdy ? (by + 1) : (by - 1);
+
+        if(ny <= BALL_R) begin
+          ny = BALL_R; tdy = 1'b1;
+        end else if(ny >= V_MAX - BALL_R) begin
+          // 掉底：减一滴血，把球放到挡板上方，暂停
+          if(life_cnt > 0)
+            life_cnt <= life_cnt - 1'b1;
+          tdy   = 1'b0;
+          bx    = pad_x + (PAD_W>>1);
+          by    = PAD_Y - BALL_R - 1;
+          running <= 1'b0;
+          ny    = by;
+        end else begin
+          // 挡板（垂直轴）
+          rx1 = pad_x; ry1 = PAD_Y; rx2 = pad_x + PAD_W; ry2 = PAD_Y + PAD_H;
+          if(circle_rect_hit(bx, ny, rx1, ry1, rx2, ry2)) begin
+            tdy = ~tdy; ny = by;
+          end else begin
+            // 砖块（垂直轴）
+            idx_ok = brick_addr(bx, ny, idx);
+            if(idx_ok && brk_on[idx]) begin
+              rx1 = BRK_LEFT + (((bx - BRK_LEFT) >> 6) << 6);
+              ry1 = BRK_TOP  + 27*row_from_y(ny - BRK_TOP);  // ★ 18 -> 27
+              rx2 = rx1 + BRK_W; ry2 = ry1 + BRK_H;
+              if(circle_rect_hit(bx, ny, rx1, ry1, rx2, ry2)) begin
+                tdy = ~tdy; ny = by;
+                if(!brick_removed) begin
+                  brick_removed = 1'b1;
+                  brk_on[idx]   <= 1'b0;
+                  if(brick_left > 0)
+                    brick_left <= brick_left - 1'b1;
+                end
+              end
+            end
+          end
+        end
+        by = ny;
+
+        // 提交到寄存器
+        ball_x <= bx[10:0];
+        ball_y <= by[10:0];
+        dir_x  <= tdx;
+        dir_y  <= tdy;
+      end
+    end
+  end
+
+  // ===== 像素着色 =====
+  wire [10:0] X = {1'b0, pix_x};
+  wire [10:0] Y = {1'b0, pix_y};
+
+  wire signed [12:0] dx_pix = $signed({1'b0,X}) - $signed({1'b0,ball_x});
+  wire signed [12:0] dy_pix = $signed({1'b0,Y}) - $signed({1'b0,ball_y});
+  wire [25:0] d2_pix = dx_pix*dx_pix + dy_pix*dy_pix;
+  wire ball_on = (d2_pix <= BALL_R2);
+
+  wire pad_on = (Y >= PAD_Y) && (Y < PAD_Y + PAD_H) &&
+                (X >= pad_x) && (X < pad_x + PAD_W);
+
+  // 砖块像素
+  reg brick_on_px; reg [15:0] brick_col_px;
+  always @* begin
+    brick_on_px = 1'b0; brick_col_px = C_YEL;
+    if( (Y >= BRK_TOP) && (Y < BRK_TOP + BRK_TH) &&
+        (X >= BRK_LEFT) && (X < BRK_LEFT + BRK_TW) ) begin
+      integer xr, yr, cc, rr, ii;
+      xr = X - BRK_LEFT;
+      yr = Y - BRK_TOP;
+      cc = xr >> 6;
+      rr = row_from_y(yr);        // ★ 调用新函数
+      ii = rr*BRK_COLS + cc;
+      if(brk_on[ii]) begin
+        brick_on_px  = 1'b1;
+        brick_col_px = (rr[0]==1'b0) ? C_MAG : C_YEL;
+      end
+    end
+  end
+
+  // ===== 血量显示：左上角三个红色小方块 =====
+  wire life1_area = (X >= 20  && X < 40  && Y >= 20 && Y < 35);
+  wire life2_area = (X >= 45  && X < 65  && Y >= 20 && Y < 35);
+  wire life3_area = (X >= 70  && X < 90  && Y >= 20 && Y < 35);
+
+  wire life1_show = life1_area && (life_cnt >= 2'd1);
+  wire life2_show = life2_area && (life_cnt >= 2'd2);
+  wire life3_show = life3_area && (life_cnt == 2'd3);
+
+  always @* begin
+    if(ball_on)
+      pix_data = C_GREEN;
+    else if(pad_on)
+      pix_data = C_WHITE;
+    else if(brick_on_px)
+      pix_data = brick_col_px;
+    else
+      pix_data = C_BLACK;
+
+    if (life1_show || life2_show || life3_show)
+      pix_data = C_RED;
+  end
+endmodule

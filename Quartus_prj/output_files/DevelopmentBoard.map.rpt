@@ -1,0 +1,1473 @@
+Analysis & Synthesis report for DevelopmentBoard
+Sun Dec 28 02:05:05 2025
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: vga_ctrl:u_vga
+ 14. Parameter Settings for User Entity Instance: key_filter:u_key_left
+ 15. Parameter Settings for User Entity Instance: key_filter:u_key_right
+ 16. Parameter Settings for User Entity Instance: key_filter:u_key_ok
+ 17. Parameter Settings for User Entity Instance: key_filter:u_key_back
+ 18. Parameter Settings for User Entity Instance: vga_pic_end:u_end
+ 19. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult10
+ 20. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult11
+ 21. Parameter Settings for Inferred Entity Instance: vga_pic_start:u_start|lpm_divide:Mod0
+ 22. Parameter Settings for Inferred Entity Instance: vga_pic_start:u_start|lpm_divide:Div0
+ 23. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult1
+ 24. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult0
+ 25. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult4
+ 26. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult3
+ 27. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult6
+ 28. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult5
+ 29. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult9
+ 30. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult8
+ 31. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult2
+ 32. Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult7
+ 33. lpm_mult Parameter Settings by Entity Instance
+ 34. Port Connectivity Checks: "vga_pic_g:u_game"
+ 35. Port Connectivity Checks: "key_filter:u_key_back"
+ 36. Port Connectivity Checks: "key_filter:u_key_ok"
+ 37. Port Connectivity Checks: "key_filter:u_key_right"
+ 38. Port Connectivity Checks: "key_filter:u_key_left"
+ 39. Post-Synthesis Netlist Statistics for Top Partition
+ 40. Elapsed Time Per Partition
+ 41. Analysis & Synthesis Messages
+ 42. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2024  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Dec 28 02:05:05 2025          ;
+; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
+; Revision Name                      ; DevelopmentBoard                               ;
+; Top-level Entity Name              ; Breakout_top                                   ;
+; Family                             ; Cyclone IV E                                   ;
+; Total logic elements               ; 1,904                                          ;
+;     Total combinational functions  ; 1,904                                          ;
+;     Dedicated logic registers      ; 185                                            ;
+; Total registers                    ; 185                                            ;
+; Total pins                         ; 24                                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 20                                             ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE10F17C8       ;                    ;
+; Top-level entity name                                            ; Breakout_top       ; DevelopmentBoard   ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.01        ;
+; Maximum used               ; 16          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-16        ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                    ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------+---------+
+; ../Rtl/pll.v                     ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/pll.v                                        ;         ;
+; ../Rtl/vga_ctrl.v                ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/vga_ctrl.v                                   ;         ;
+; ../Rtl/vga_pic_start.v           ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/vga_pic_start.v                              ;         ;
+; ../Rtl/vga_pic_g.v               ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/vga_pic_g.v                                  ;         ;
+; ../Rtl/vga_pic_ctrl.v            ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/vga_pic_ctrl.v                               ;         ;
+; ../Rtl/vga_pic_end.v             ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/vga_pic_end.v                                ;         ;
+; ../Rtl/Breakout_top.v            ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/Breakout_top.v                               ;         ;
+; ../Rtl/key_filter.v              ; yes             ; User Verilog HDL File        ; D:/abc/fp1/Rtl/key_filter.v                                 ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/lpm_mult.tdf        ;         ;
+; aglobal231.inc                   ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/aglobal231.inc      ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/lpm_add_sub.inc     ;         ;
+; multcore.inc                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/multcore.inc        ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/bypassff.inc        ;         ;
+; altshift.inc                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/altshift.inc        ;         ;
+; db/mult_t5t.tdf                  ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/mult_t5t.tdf                      ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; db/lpm_divide_poo.tdf            ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/lpm_divide_poo.tdf                ;         ;
+; db/abs_divider_hbg.tdf           ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/abs_divider_hbg.tdf               ;         ;
+; db/alt_u_div_07f.tdf             ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/alt_u_div_07f.tdf                 ;         ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/add_sub_7pc.tdf                   ;         ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/add_sub_8pc.tdf                   ;         ;
+; db/lpm_abs_1v9.tdf               ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/lpm_abs_1v9.tdf                   ;         ;
+; db/lpm_abs_g0a.tdf               ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/lpm_abs_g0a.tdf                   ;         ;
+; db/lpm_divide_m0p.tdf            ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/lpm_divide_m0p.tdf                ;         ;
+; db/mult_p5t.tdf                  ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/mult_p5t.tdf                      ;         ;
+; db/mult_56t.tdf                  ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/mult_56t.tdf                      ;         ;
+; db/mult_v5t.tdf                  ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/mult_v5t.tdf                      ;         ;
+; db/mult_16t.tdf                  ; yes             ; Auto-Generated Megafunction  ; D:/abc/fp1/Quartus_prj/db/mult_16t.tdf                      ;         ;
+; multcore.tdf                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/multcore.tdf        ;         ;
+; csa_add.inc                      ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/csa_add.inc         ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/mpar_add.inc        ;         ;
+; muleabz.inc                      ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/muleabz.inc         ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/mul_lfrg.inc        ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/mul_boothc.inc      ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/alt_ded_mult.inc    ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/alt_ded_mult_y.inc  ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/dffpipe.inc         ;         ;
+; mpar_add.tdf                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/mpar_add.tdf        ;         ;
+; altshift.tdf                     ; yes             ; Megafunction                 ; d:/fpga/quartus/libraries/megafunctions/altshift.tdf        ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                       ;
++---------------------------------------------+---------------------+
+; Resource                                    ; Usage               ;
++---------------------------------------------+---------------------+
+; Estimated Total logic elements              ; 1,904               ;
+;                                             ;                     ;
+; Total combinational functions               ; 1904                ;
+; Logic element usage by number of LUT inputs ;                     ;
+;     -- 4 input functions                    ; 747                 ;
+;     -- 3 input functions                    ; 620                 ;
+;     -- <=2 input functions                  ; 537                 ;
+;                                             ;                     ;
+; Logic elements by mode                      ;                     ;
+;     -- normal mode                          ; 1175                ;
+;     -- arithmetic mode                      ; 729                 ;
+;                                             ;                     ;
+; Total registers                             ; 185                 ;
+;     -- Dedicated logic registers            ; 185                 ;
+;     -- I/O registers                        ; 0                   ;
+;                                             ;                     ;
+; I/O pins                                    ; 24                  ;
+;                                             ;                     ;
+; Embedded Multiplier 9-bit elements          ; 20                  ;
+;                                             ;                     ;
+; Maximum fan-out node                        ; pll:pll_inst|clk_25 ;
+; Maximum fan-out                             ; 185                 ;
+; Total fan-out                               ; 6704                ;
+; Average fan-out                             ; 3.11                ;
++---------------------------------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                     ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                              ; Entity Name     ; Library Name ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; |Breakout_top                            ; 1904 (3)            ; 185 (3)                   ; 0           ; 20           ; 0       ; 10        ; 24   ; 0            ; |Breakout_top                                                                                                                    ; Breakout_top    ; work         ;
+;    |key_filter:u_key_left|               ; 29 (29)             ; 21 (21)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|key_filter:u_key_left                                                                                              ; key_filter      ; work         ;
+;    |key_filter:u_key_ok|                 ; 30 (30)             ; 22 (22)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|key_filter:u_key_ok                                                                                                ; key_filter      ; work         ;
+;    |key_filter:u_key_right|              ; 29 (29)             ; 21 (21)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|key_filter:u_key_right                                                                                             ; key_filter      ; work         ;
+;    |pll:pll_inst|                        ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|pll:pll_inst                                                                                                       ; pll             ; work         ;
+;    |vga_ctrl:u_vga|                      ; 107 (107)           ; 20 (20)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_ctrl:u_vga                                                                                                     ; vga_ctrl        ; work         ;
+;    |vga_pic_ctrl:u_pic_ctrl|             ; 22 (22)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_ctrl:u_pic_ctrl                                                                                            ; vga_pic_ctrl    ; work         ;
+;    |vga_pic_end:u_end|                   ; 214 (214)           ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_end:u_end                                                                                                  ; vga_pic_end     ; work         ;
+;    |vga_pic_g:u_game|                    ; 1142 (1130)         ; 96 (96)                   ; 0           ; 20           ; 0       ; 10        ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game                                                                                                   ; vga_pic_g       ; work         ;
+;       |lpm_mult:Mult0|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult0                                                                                    ; lpm_mult        ; work         ;
+;          |mult_56t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult0|mult_56t:auto_generated                                                            ; mult_56t        ; work         ;
+;       |lpm_mult:Mult10|                  ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult10                                                                                   ; lpm_mult        ; work         ;
+;          |mult_t5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult10|mult_t5t:auto_generated                                                           ; mult_t5t        ; work         ;
+;       |lpm_mult:Mult11|                  ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult11                                                                                   ; lpm_mult        ; work         ;
+;          |mult_t5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult11|mult_t5t:auto_generated                                                           ; mult_t5t        ; work         ;
+;       |lpm_mult:Mult1|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult1                                                                                    ; lpm_mult        ; work         ;
+;          |mult_p5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult1|mult_p5t:auto_generated                                                            ; mult_p5t        ; work         ;
+;       |lpm_mult:Mult2|                   ; 6 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult2                                                                                    ; lpm_mult        ; work         ;
+;          |multcore:mult_core|            ; 6 (6)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult2|multcore:mult_core                                                                 ; multcore        ; work         ;
+;       |lpm_mult:Mult3|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult3                                                                                    ; lpm_mult        ; work         ;
+;          |mult_v5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult3|mult_v5t:auto_generated                                                            ; mult_v5t        ; work         ;
+;       |lpm_mult:Mult4|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult4                                                                                    ; lpm_mult        ; work         ;
+;          |mult_p5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult4|mult_p5t:auto_generated                                                            ; mult_p5t        ; work         ;
+;       |lpm_mult:Mult5|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult5                                                                                    ; lpm_mult        ; work         ;
+;          |mult_56t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult5|mult_56t:auto_generated                                                            ; mult_56t        ; work         ;
+;       |lpm_mult:Mult6|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult6                                                                                    ; lpm_mult        ; work         ;
+;          |mult_t5t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult6|mult_t5t:auto_generated                                                            ; mult_t5t        ; work         ;
+;       |lpm_mult:Mult7|                   ; 6 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult7                                                                                    ; lpm_mult        ; work         ;
+;          |multcore:mult_core|            ; 6 (6)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult7|multcore:mult_core                                                                 ; multcore        ; work         ;
+;       |lpm_mult:Mult8|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult8                                                                                    ; lpm_mult        ; work         ;
+;          |mult_56t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult8|mult_56t:auto_generated                                                            ; mult_56t        ; work         ;
+;       |lpm_mult:Mult9|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult9                                                                                    ; lpm_mult        ; work         ;
+;          |mult_16t:auto_generated|       ; 0 (0)               ; 0 (0)                     ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Breakout_top|vga_pic_g:u_game|lpm_mult:Mult9|mult_16t:auto_generated                                                            ; mult_16t        ; work         ;
+;    |vga_pic_start:u_start|               ; 327 (70)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start                                                                                              ; vga_pic_start   ; work         ;
+;       |lpm_divide:Div0|                  ; 127 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Div0                                                                              ; lpm_divide      ; work         ;
+;          |lpm_divide_m0p:auto_generated| ; 127 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Div0|lpm_divide_m0p:auto_generated                                                ; lpm_divide_m0p  ; work         ;
+;             |abs_divider_hbg:divider|    ; 127 (22)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Div0|lpm_divide_m0p:auto_generated|abs_divider_hbg:divider                        ; abs_divider_hbg ; work         ;
+;                |alt_u_div_07f:divider|   ; 103 (103)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Div0|lpm_divide_m0p:auto_generated|abs_divider_hbg:divider|alt_u_div_07f:divider  ; alt_u_div_07f   ; work         ;
+;                |lpm_abs_g0a:my_abs_num|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Div0|lpm_divide_m0p:auto_generated|abs_divider_hbg:divider|lpm_abs_g0a:my_abs_num ; lpm_abs_g0a     ; work         ;
+;       |lpm_divide:Mod0|                  ; 130 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Mod0                                                                              ; lpm_divide      ; work         ;
+;          |lpm_divide_poo:auto_generated| ; 130 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Mod0|lpm_divide_poo:auto_generated                                                ; lpm_divide_poo  ; work         ;
+;             |abs_divider_hbg:divider|    ; 130 (8)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Mod0|lpm_divide_poo:auto_generated|abs_divider_hbg:divider                        ; abs_divider_hbg ; work         ;
+;                |alt_u_div_07f:divider|   ; 111 (111)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Mod0|lpm_divide_poo:auto_generated|abs_divider_hbg:divider|alt_u_div_07f:divider  ; alt_u_div_07f   ; work         ;
+;                |lpm_abs_g0a:my_abs_num|  ; 11 (11)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout_top|vga_pic_start:u_start|lpm_divide:Mod0|lpm_divide_poo:auto_generated|abs_divider_hbg:divider|lpm_abs_g0a:my_abs_num ; lpm_abs_g0a     ; work         ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 0           ;
+; Simple Multipliers (18-bit)           ; 10          ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 20          ;
+; Signed Embedded Multipliers           ; 10          ;
+; Unsigned Embedded Multipliers         ; 0           ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
+
+
++-------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                        ;
++----------------------------------------------+--------------------------------------------+
+; Register name                                ; Reason for Removal                         ;
++----------------------------------------------+--------------------------------------------+
+; vga_pic_end:u_end|pix_data[0..2,6..8,12]     ; Stuck at GND due to stuck port data_in     ;
+; vga_pic_end:u_end|pix_data[3..5,9..11,13,14] ; Merged with vga_pic_end:u_end|pix_data[15] ;
+; vga_pic_g:u_game|pad_x[0]                    ; Stuck at GND due to stuck port data_in     ;
+; vga_pic_g:u_game|ball_y[9,10]                ; Stuck at GND due to stuck port data_in     ;
+; Total Number of Removed Registers = 18       ;                                            ;
++----------------------------------------------+--------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 185   ;
+; Number of registers using Synchronous Clear  ; 57    ;
+; Number of registers using Synchronous Load   ; 13    ;
+; Number of registers using Asynchronous Clear ; 185   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 78    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; vga_pic_g:u_game|brick_left[3]          ; 2       ;
+; vga_pic_g:u_game|brick_left[5]          ; 2       ;
+; vga_pic_g:u_game|ball_x[8]              ; 6       ;
+; vga_pic_g:u_game|ball_x[6]              ; 5       ;
+; vga_pic_g:u_game|life_cnt[1]            ; 5       ;
+; vga_pic_g:u_game|life_cnt[0]            ; 6       ;
+; vga_pic_g:u_game|pad_x[8]               ; 10      ;
+; vga_pic_g:u_game|pad_x[4]               ; 10      ;
+; vga_pic_g:u_game|pad_x[3]               ; 13      ;
+; vga_pic_g:u_game|brk_on[13]             ; 4       ;
+; vga_pic_g:u_game|brk_on[1]              ; 4       ;
+; vga_pic_g:u_game|brk_on[5]              ; 4       ;
+; vga_pic_g:u_game|brk_on[9]              ; 4       ;
+; vga_pic_g:u_game|brk_on[15]             ; 4       ;
+; vga_pic_g:u_game|brk_on[3]              ; 4       ;
+; vga_pic_g:u_game|brk_on[7]              ; 4       ;
+; vga_pic_g:u_game|brk_on[11]             ; 4       ;
+; vga_pic_g:u_game|brk_on[14]             ; 4       ;
+; vga_pic_g:u_game|brk_on[2]              ; 4       ;
+; vga_pic_g:u_game|brk_on[6]              ; 4       ;
+; vga_pic_g:u_game|brk_on[10]             ; 4       ;
+; vga_pic_g:u_game|brk_on[0]              ; 4       ;
+; vga_pic_g:u_game|brk_on[12]             ; 4       ;
+; vga_pic_g:u_game|brk_on[4]              ; 4       ;
+; vga_pic_g:u_game|brk_on[8]              ; 4       ;
+; vga_pic_g:u_game|brk_on[33]             ; 4       ;
+; vga_pic_g:u_game|brk_on[35]             ; 4       ;
+; vga_pic_g:u_game|brk_on[34]             ; 4       ;
+; vga_pic_g:u_game|brk_on[32]             ; 4       ;
+; vga_pic_g:u_game|brk_on[37]             ; 4       ;
+; vga_pic_g:u_game|brk_on[39]             ; 4       ;
+; vga_pic_g:u_game|brk_on[38]             ; 4       ;
+; vga_pic_g:u_game|brk_on[36]             ; 4       ;
+; vga_pic_g:u_game|brk_on[27]             ; 4       ;
+; vga_pic_g:u_game|brk_on[29]             ; 4       ;
+; vga_pic_g:u_game|brk_on[31]             ; 4       ;
+; vga_pic_g:u_game|brk_on[25]             ; 4       ;
+; vga_pic_g:u_game|brk_on[20]             ; 4       ;
+; vga_pic_g:u_game|brk_on[18]             ; 4       ;
+; vga_pic_g:u_game|brk_on[22]             ; 4       ;
+; vga_pic_g:u_game|brk_on[16]             ; 4       ;
+; vga_pic_g:u_game|brk_on[21]             ; 4       ;
+; vga_pic_g:u_game|brk_on[19]             ; 4       ;
+; vga_pic_g:u_game|brk_on[23]             ; 4       ;
+; vga_pic_g:u_game|brk_on[17]             ; 4       ;
+; vga_pic_g:u_game|brk_on[26]             ; 4       ;
+; vga_pic_g:u_game|brk_on[28]             ; 4       ;
+; vga_pic_g:u_game|brk_on[30]             ; 4       ;
+; vga_pic_g:u_game|brk_on[24]             ; 4       ;
+; vga_pic_g:u_game|ball_y[2]              ; 16      ;
+; vga_pic_g:u_game|ball_y[8]              ; 15      ;
+; vga_pic_g:u_game|dir_x                  ; 26      ;
+; key_filter:u_key_ok|key_n_last          ; 3       ;
+; key_filter:u_key_left|key_n_last        ; 2       ;
+; key_filter:u_key_right|key_n_last       ; 2       ;
+; Total number of inverted registers = 55 ;         ;
++-----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Breakout_top|vga_ctrl:u_vga|cnt_v[3]        ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Breakout_top|key_filter:u_key_ok|cnt[0]     ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Breakout_top|key_filter:u_key_right|cnt[8]  ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Breakout_top|key_filter:u_key_left|cnt[11]  ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|ball_y[5]     ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|brick_left[0] ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Breakout_top|state[0]                       ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|pad_x[1]      ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|ball_y[8]     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 0 LEs                ; 4 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|brick_left[3] ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |Breakout_top|vga_pic_g:u_game|pad_x[3]      ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Breakout_top|vga_ctrl:u_vga|rgb[0]          ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Breakout_top|vga_ctrl:u_vga|rgb[9]          ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 26 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|py            ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|px            ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|px            ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|nx            ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|row_from_y    ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|row_from_y    ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|row_from_y    ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Breakout_top|vga_pic_ctrl:u_pic_ctrl|Mux15  ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; No         ; |Breakout_top|vga_pic_g:u_game|nx            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_ctrl:u_vga ;
++----------------+------------+-------------------------------+
+; Parameter Name ; Value      ; Type                          ;
++----------------+------------+-------------------------------+
+; H_SYNC         ; 0001100000 ; Unsigned Binary               ;
+; H_TOTAL        ; 1100100000 ; Unsigned Binary               ;
+; V_SYNC         ; 0000000010 ; Unsigned Binary               ;
+; V_TOTAL        ; 1000001101 ; Unsigned Binary               ;
+; H_BACK         ; 0000101000 ; Unsigned Binary               ;
+; H_LEFT         ; 0000001000 ; Unsigned Binary               ;
+; H_VALID        ; 1010000000 ; Unsigned Binary               ;
+; V_BACK         ; 0000011001 ; Unsigned Binary               ;
+; V_TOP          ; 0000001000 ; Unsigned Binary               ;
+; V_VALID        ; 0111100000 ; Unsigned Binary               ;
++----------------+------------+-------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: key_filter:u_key_left ;
++----------------+--------+------------------------------------------+
+; Parameter Name ; Value  ; Type                                     ;
++----------------+--------+------------------------------------------+
+; CNT_MAX        ; 500000 ; Signed Integer                           ;
+; CNT_WIDTH      ; 19     ; Signed Integer                           ;
++----------------+--------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: key_filter:u_key_right ;
++----------------+--------+-------------------------------------------+
+; Parameter Name ; Value  ; Type                                      ;
++----------------+--------+-------------------------------------------+
+; CNT_MAX        ; 500000 ; Signed Integer                            ;
+; CNT_WIDTH      ; 19     ; Signed Integer                            ;
++----------------+--------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: key_filter:u_key_ok ;
++----------------+--------+----------------------------------------+
+; Parameter Name ; Value  ; Type                                   ;
++----------------+--------+----------------------------------------+
+; CNT_MAX        ; 500000 ; Signed Integer                         ;
+; CNT_WIDTH      ; 19     ; Signed Integer                         ;
++----------------+--------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: key_filter:u_key_back ;
++----------------+--------+------------------------------------------+
+; Parameter Name ; Value  ; Type                                     ;
++----------------+--------+------------------------------------------+
+; CNT_MAX        ; 500000 ; Signed Integer                           ;
+; CNT_WIDTH      ; 19     ; Signed Integer                           ;
++----------------+--------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_pic_end:u_end ;
++----------------+------------------+----------------------------+
+; Parameter Name ; Value            ; Type                       ;
++----------------+------------------+----------------------------+
+; CHAR_B_H       ; 0010001100       ; Unsigned Binary            ;
+; CHAR_B_V       ; 0011011000       ; Unsigned Binary            ;
+; CHAR_W         ; 0100000000       ; Unsigned Binary            ;
+; CHAR_H         ; 0001000000       ; Unsigned Binary            ;
+; BLACK          ; 0000000000000000 ; Unsigned Binary            ;
+; WHITE          ; 1111111111111111 ; Unsigned Binary            ;
+; GOLDEN         ; 1111111011000000 ; Unsigned Binary            ;
+; PINK           ; 1110111000111000 ; Unsigned Binary            ;
++----------------+------------------+----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult10   ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 12           ; Untyped             ;
+; LPM_WIDTHB                                     ; 12           ; Untyped             ;
+; LPM_WIDTHP                                     ; 24           ; Untyped             ;
+; LPM_WIDTHR                                     ; 24           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_t5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult11   ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 12           ; Untyped             ;
+; LPM_WIDTHB                                     ; 12           ; Untyped             ;
+; LPM_WIDTHP                                     ; 24           ; Untyped             ;
+; LPM_WIDTHR                                     ; 24           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_t5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_start:u_start|lpm_divide:Mod0 ;
++------------------------+----------------+----------------------------------------------+
+; Parameter Name         ; Value          ; Type                                         ;
++------------------------+----------------+----------------------------------------------+
+; LPM_WIDTHN             ; 30             ; Untyped                                      ;
+; LPM_WIDTHD             ; 4              ; Untyped                                      ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                                      ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                                      ;
+; LPM_PIPELINE           ; 0              ; Untyped                                      ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                                      ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                      ;
+; CBXI_PARAMETER         ; lpm_divide_poo ; Untyped                                      ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                      ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                      ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                   ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                 ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                 ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                               ;
++------------------------+----------------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_start:u_start|lpm_divide:Div0 ;
++------------------------+----------------+----------------------------------------------+
+; Parameter Name         ; Value          ; Type                                         ;
++------------------------+----------------+----------------------------------------------+
+; LPM_WIDTHN             ; 30             ; Untyped                                      ;
+; LPM_WIDTHD             ; 4              ; Untyped                                      ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                                      ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                                      ;
+; LPM_PIPELINE           ; 0              ; Untyped                                      ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                                      ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                      ;
+; CBXI_PARAMETER         ; lpm_divide_m0p ; Untyped                                      ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                      ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                      ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                   ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                 ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                 ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                               ;
++------------------------+----------------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult1    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 11           ; Untyped             ;
+; LPM_WIDTHB                                     ; 11           ; Untyped             ;
+; LPM_WIDTHP                                     ; 22           ; Untyped             ;
+; LPM_WIDTHR                                     ; 22           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_p5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult0    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 14           ; Untyped             ;
+; LPM_WIDTHB                                     ; 14           ; Untyped             ;
+; LPM_WIDTHP                                     ; 28           ; Untyped             ;
+; LPM_WIDTHR                                     ; 28           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_56t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult4    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 11           ; Untyped             ;
+; LPM_WIDTHB                                     ; 11           ; Untyped             ;
+; LPM_WIDTHP                                     ; 22           ; Untyped             ;
+; LPM_WIDTHR                                     ; 22           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_p5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult3    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 15           ; Untyped             ;
+; LPM_WIDTHB                                     ; 15           ; Untyped             ;
+; LPM_WIDTHP                                     ; 30           ; Untyped             ;
+; LPM_WIDTHR                                     ; 30           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_v5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult6    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 12           ; Untyped             ;
+; LPM_WIDTHB                                     ; 12           ; Untyped             ;
+; LPM_WIDTHP                                     ; 24           ; Untyped             ;
+; LPM_WIDTHR                                     ; 24           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_t5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult5    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 14           ; Untyped             ;
+; LPM_WIDTHB                                     ; 14           ; Untyped             ;
+; LPM_WIDTHP                                     ; 28           ; Untyped             ;
+; LPM_WIDTHR                                     ; 28           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_56t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult9    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 13           ; Untyped             ;
+; LPM_WIDTHB                                     ; 13           ; Untyped             ;
+; LPM_WIDTHP                                     ; 26           ; Untyped             ;
+; LPM_WIDTHR                                     ; 26           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_16t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult8    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 14           ; Untyped             ;
+; LPM_WIDTHB                                     ; 14           ; Untyped             ;
+; LPM_WIDTHP                                     ; 28           ; Untyped             ;
+; LPM_WIDTHR                                     ; 28           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_56t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult2    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 5            ; Untyped             ;
+; LPM_WIDTHB                                     ; 3            ; Untyped             ;
+; LPM_WIDTHP                                     ; 8            ; Untyped             ;
+; LPM_WIDTHR                                     ; 8            ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; YES          ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vga_pic_g:u_game|lpm_mult:Mult7    ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 5            ; Untyped             ;
+; LPM_WIDTHB                                     ; 3            ; Untyped             ;
+; LPM_WIDTHP                                     ; 8            ; Untyped             ;
+; LPM_WIDTHR                                     ; 8            ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; YES          ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                           ;
++---------------------------------------+----------------------------------+
+; Name                                  ; Value                            ;
++---------------------------------------+----------------------------------+
+; Number of entity instances            ; 12                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult10 ;
+;     -- LPM_WIDTHA                     ; 12                               ;
+;     -- LPM_WIDTHB                     ; 12                               ;
+;     -- LPM_WIDTHP                     ; 24                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult11 ;
+;     -- LPM_WIDTHA                     ; 12                               ;
+;     -- LPM_WIDTHB                     ; 12                               ;
+;     -- LPM_WIDTHP                     ; 24                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult1  ;
+;     -- LPM_WIDTHA                     ; 11                               ;
+;     -- LPM_WIDTHB                     ; 11                               ;
+;     -- LPM_WIDTHP                     ; 22                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult0  ;
+;     -- LPM_WIDTHA                     ; 14                               ;
+;     -- LPM_WIDTHB                     ; 14                               ;
+;     -- LPM_WIDTHP                     ; 28                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult4  ;
+;     -- LPM_WIDTHA                     ; 11                               ;
+;     -- LPM_WIDTHB                     ; 11                               ;
+;     -- LPM_WIDTHP                     ; 22                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult3  ;
+;     -- LPM_WIDTHA                     ; 15                               ;
+;     -- LPM_WIDTHB                     ; 15                               ;
+;     -- LPM_WIDTHP                     ; 30                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult6  ;
+;     -- LPM_WIDTHA                     ; 12                               ;
+;     -- LPM_WIDTHB                     ; 12                               ;
+;     -- LPM_WIDTHP                     ; 24                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult5  ;
+;     -- LPM_WIDTHA                     ; 14                               ;
+;     -- LPM_WIDTHB                     ; 14                               ;
+;     -- LPM_WIDTHP                     ; 28                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult9  ;
+;     -- LPM_WIDTHA                     ; 13                               ;
+;     -- LPM_WIDTHB                     ; 13                               ;
+;     -- LPM_WIDTHP                     ; 26                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult8  ;
+;     -- LPM_WIDTHA                     ; 14                               ;
+;     -- LPM_WIDTHB                     ; 14                               ;
+;     -- LPM_WIDTHP                     ; 28                               ;
+;     -- LPM_REPRESENTATION             ; SIGNED                           ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                               ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult2  ;
+;     -- LPM_WIDTHA                     ; 5                                ;
+;     -- LPM_WIDTHB                     ; 3                                ;
+;     -- LPM_WIDTHP                     ; 8                                ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                         ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
+; Entity Instance                       ; vga_pic_g:u_game|lpm_mult:Mult7  ;
+;     -- LPM_WIDTHA                     ; 5                                ;
+;     -- LPM_WIDTHB                     ; 3                                ;
+;     -- LPM_WIDTHP                     ; 8                                ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                         ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                               ;
+;     -- USE_EAB                        ; OFF                              ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                             ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                               ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                               ;
++---------------------------------------+----------------------------------+
+
+
++----------------------------------------------+
+; Port Connectivity Checks: "vga_pic_g:u_game" ;
++----------+-------+----------+----------------+
+; Port     ; Type  ; Severity ; Details        ;
++----------+-------+----------+----------------+
+; btn_ok   ; Input ; Info     ; Stuck at GND   ;
+; btn_back ; Input ; Info     ; Stuck at GND   ;
++----------+-------+----------+----------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "key_filter:u_key_back"                                                                   ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; key_state ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; key_flag  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "key_filter:u_key_ok"                                                                     ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; key_state ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "key_filter:u_key_right"                                                                 ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; key_flag ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "key_filter:u_key_left"                                                                  ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; key_flag ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 24                          ;
+; cycloneiii_ff         ; 185                         ;
+;     CLR               ; 50                          ;
+;     CLR SCLR          ; 57                          ;
+;     ENA CLR           ; 65                          ;
+;     ENA CLR SLD       ; 13                          ;
+; cycloneiii_lcell_comb ; 1906                        ;
+;     arith             ; 729                         ;
+;         1 data inputs ; 11                          ;
+;         2 data inputs ; 273                         ;
+;         3 data inputs ; 445                         ;
+;     normal            ; 1177                        ;
+;         0 data inputs ; 32                          ;
+;         1 data inputs ; 27                          ;
+;         2 data inputs ; 196                         ;
+;         3 data inputs ; 175                         ;
+;         4 data inputs ; 747                         ;
+; cycloneiii_mac_mult   ; 10                          ;
+; cycloneiii_mac_out    ; 10                          ;
+;                       ;                             ;
+; Max LUT depth         ; 40.20                       ;
+; Average LUT depth     ; 16.08                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:07     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+    Info: Processing started: Sun Dec 28 02:04:52 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DevelopmentBoard -c DevelopmentBoard
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/developmentboard.v
+    Info (12023): Found entity 1: DevelopmentBoard File: D:/abc/fp1/Rtl/DevelopmentBoard.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/pll.v
+    Info (12023): Found entity 1: pll File: D:/abc/fp1/Rtl/pll.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/vga_ctrl.v
+    Info (12023): Found entity 1: vga_ctrl File: D:/abc/fp1/Rtl/vga_ctrl.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/vga_pic_start.v
+    Info (12023): Found entity 1: vga_pic_start File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/vga_pic_g.v
+    Info (12023): Found entity 1: vga_pic_g File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/vga_pic_ctrl.v
+    Info (12023): Found entity 1: vga_pic_ctrl File: D:/abc/fp1/Rtl/vga_pic_ctrl.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/vga_pic_end.v
+    Info (12023): Found entity 1: vga_pic_end File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/breakout_top.v
+    Info (12023): Found entity 1: Breakout_top File: D:/abc/fp1/Rtl/Breakout_top.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/rtl/key_filter.v
+    Info (12023): Found entity 1: key_filter File: D:/abc/fp1/Rtl/key_filter.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/fp1/sim/tb_key_filter.v
+    Info (12023): Found entity 1: tb_key_filter File: D:/abc/fp1/Sim/tb_key_filter.v Line: 2
+Info (12127): Elaborating entity "Breakout_top" for the top level hierarchy
+Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 21
+Info (12128): Elaborating entity "vga_ctrl" for hierarchy "vga_ctrl:u_vga" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 35
+Info (12128): Elaborating entity "key_filter" for hierarchy "key_filter:u_key_left" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 49
+Info (12128): Elaborating entity "vga_pic_start" for hierarchy "vga_pic_start:u_start" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 147
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "sx", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "sy", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "bx", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "by", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "idx", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_start.v(179): inferring latch(es) for variable "bit_x", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 179
+Warning (10030): Net "bitmap_mem.waddr_a" at vga_pic_start.v(25) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 25
+Warning (10030): Net "bitmap_mem.data_a" at vga_pic_start.v(25) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 25
+Warning (10030): Net "bitmap_mem.we_a" at vga_pic_start.v(25) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 25
+Info (12128): Elaborating entity "vga_pic_g" for hierarchy "vga_pic_g:u_game" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 160
+Warning (10230): Verilog HDL assignment warning at vga_pic_g.v(114): truncated value with size 32 to match size of target (6) File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 114
+Warning (10776): Verilog HDL warning at vga_pic_g.v(105): variable xr in static task or function brick_index may have unintended latch behavior File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 105
+Warning (10776): Verilog HDL warning at vga_pic_g.v(105): variable yr in static task or function brick_index may have unintended latch behavior File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 105
+Warning (10776): Verilog HDL warning at vga_pic_g.v(105): variable c in static task or function brick_index may have unintended latch behavior File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 105
+Warning (10776): Verilog HDL warning at vga_pic_g.v(105): variable r in static task or function brick_index may have unintended latch behavior File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 105
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_g.v(243): inferring latch(es) for variable "xr_px", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 243
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_g.v(243): inferring latch(es) for variable "yr_px", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 243
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_g.v(243): inferring latch(es) for variable "cc_px", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 243
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_g.v(243): inferring latch(es) for variable "rr_px", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 243
+Warning (10240): Verilog HDL Always Construct warning at vga_pic_g.v(243): inferring latch(es) for variable "ii_px", which holds its previous value in one or more paths through the always construct File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 243
+Info (12128): Elaborating entity "vga_pic_end" for hierarchy "vga_pic_end:u_end" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 168
+Warning (10230): Verilog HDL assignment warning at vga_pic_end.v(111): truncated value with size 32 to match size of target (11) File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 111
+Warning (10030): Net "bmp.waddr_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 88
+Warning (10030): Net "bmp.data_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 88
+Warning (10030): Net "bmp.we_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 88
+Info (12128): Elaborating entity "vga_pic_ctrl" for hierarchy "vga_pic_ctrl:u_pic_ctrl" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 176
+Info (276014): Found 2 instances of uninferred RAM logic
+    Info (276007): RAM logic "vga_pic_start:u_start|bitmap_mem" is uninferred due to asynchronous read logic File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 25
+    Info (276007): RAM logic "vga_pic_end:u_end|bmp" is uninferred due to asynchronous read logic File: D:/abc/fp1/Rtl/vga_pic_end.v Line: 88
+Warning (113018): Width of data items in "DevelopmentBoard.ram0_vga_pic_start_62e67b9d.hdl.mif" is greater than the memory width. Truncating data items to fit in memory. File: D:/abc/fp1/Quartus_prj/db/DevelopmentBoard.ram0_vga_pic_start_62e67b9d.hdl.mif Line: 10
+Critical Warning (127005): Memory depth (2048) in the design file differs from memory depth (256) in the Memory Initialization File "D:/abc/fp1/Quartus_prj/db/DevelopmentBoard.ram0_vga_pic_start_62e67b9d.hdl.mif" -- setting initial value for remaining addresses to 0
+Info (278001): Inferred 14 megafunctions from design logic
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult10" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 232
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult11" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 232
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "vga_pic_start:u_start|Mod0" File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 191
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "vga_pic_start:u_start|Div0" File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 190
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult1" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult0" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult4" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult3" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult6" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult5" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult9" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult8" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult2" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 158
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "vga_pic_g:u_game|Mult7" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 196
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult10" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 232
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult10" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 232
+    Info (12134): Parameter "LPM_WIDTHA" = "12"
+    Info (12134): Parameter "LPM_WIDTHB" = "12"
+    Info (12134): Parameter "LPM_WIDTHP" = "24"
+    Info (12134): Parameter "LPM_WIDTHR" = "24"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_t5t.tdf
+    Info (12023): Found entity 1: mult_t5t File: D:/abc/fp1/Quartus_prj/db/mult_t5t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "vga_pic_start:u_start|lpm_divide:Mod0" File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 191
+Info (12133): Instantiated megafunction "vga_pic_start:u_start|lpm_divide:Mod0" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 191
+    Info (12134): Parameter "LPM_WIDTHN" = "30"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_poo.tdf
+    Info (12023): Found entity 1: lpm_divide_poo File: D:/abc/fp1/Quartus_prj/db/lpm_divide_poo.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_hbg.tdf
+    Info (12023): Found entity 1: abs_divider_hbg File: D:/abc/fp1/Quartus_prj/db/abs_divider_hbg.tdf Line: 29
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_07f.tdf
+    Info (12023): Found entity 1: alt_u_div_07f File: D:/abc/fp1/Quartus_prj/db/alt_u_div_07f.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info (12023): Found entity 1: add_sub_7pc File: D:/abc/fp1/Quartus_prj/db/add_sub_7pc.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info (12023): Found entity 1: add_sub_8pc File: D:/abc/fp1/Quartus_prj/db/add_sub_8pc.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_1v9.tdf
+    Info (12023): Found entity 1: lpm_abs_1v9 File: D:/abc/fp1/Quartus_prj/db/lpm_abs_1v9.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_g0a.tdf
+    Info (12023): Found entity 1: lpm_abs_g0a File: D:/abc/fp1/Quartus_prj/db/lpm_abs_g0a.tdf Line: 25
+Info (12130): Elaborated megafunction instantiation "vga_pic_start:u_start|lpm_divide:Div0" File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 190
+Info (12133): Instantiated megafunction "vga_pic_start:u_start|lpm_divide:Div0" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_start.v Line: 190
+    Info (12134): Parameter "LPM_WIDTHN" = "30"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_m0p.tdf
+    Info (12023): Found entity 1: lpm_divide_m0p File: D:/abc/fp1/Quartus_prj/db/lpm_divide_m0p.tdf Line: 25
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult1" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult1" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (12134): Parameter "LPM_WIDTHA" = "11"
+    Info (12134): Parameter "LPM_WIDTHB" = "11"
+    Info (12134): Parameter "LPM_WIDTHP" = "22"
+    Info (12134): Parameter "LPM_WIDTHR" = "22"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_p5t.tdf
+    Info (12023): Found entity 1: mult_p5t File: D:/abc/fp1/Quartus_prj/db/mult_p5t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult0" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult0" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (12134): Parameter "LPM_WIDTHA" = "14"
+    Info (12134): Parameter "LPM_WIDTHB" = "14"
+    Info (12134): Parameter "LPM_WIDTHP" = "28"
+    Info (12134): Parameter "LPM_WIDTHR" = "28"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_56t.tdf
+    Info (12023): Found entity 1: mult_56t File: D:/abc/fp1/Quartus_prj/db/mult_56t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult3" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult3" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (12134): Parameter "LPM_WIDTHA" = "15"
+    Info (12134): Parameter "LPM_WIDTHB" = "15"
+    Info (12134): Parameter "LPM_WIDTHP" = "30"
+    Info (12134): Parameter "LPM_WIDTHR" = "30"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_v5t.tdf
+    Info (12023): Found entity 1: mult_v5t File: D:/abc/fp1/Quartus_prj/db/mult_v5t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult9" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult9" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 87
+    Info (12134): Parameter "LPM_WIDTHA" = "13"
+    Info (12134): Parameter "LPM_WIDTHB" = "13"
+    Info (12134): Parameter "LPM_WIDTHP" = "26"
+    Info (12134): Parameter "LPM_WIDTHR" = "26"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_16t.tdf
+    Info (12023): Found entity 1: mult_16t File: D:/abc/fp1/Quartus_prj/db/mult_16t.tdf Line: 29
+Info (12130): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2" File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 158
+Info (12133): Instantiated megafunction "vga_pic_g:u_game|lpm_mult:Mult2" with the following parameter: File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 158
+    Info (12134): Parameter "LPM_WIDTHA" = "5"
+    Info (12134): Parameter "LPM_WIDTHB" = "3"
+    Info (12134): Parameter "LPM_WIDTHP" = "8"
+    Info (12134): Parameter "LPM_WIDTHR" = "8"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2|multcore:mult_core", which is child of megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2" File: d:/fpga/quartus/libraries/megafunctions/lpm_mult.tdf Line: 309
+Info (12131): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2" File: d:/fpga/quartus/libraries/megafunctions/multcore.tdf Line: 229
+Info (12131): Elaborated megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2|altshift:external_latency_ffs", which is child of megafunction instantiation "vga_pic_g:u_game|lpm_mult:Mult2" File: d:/fpga/quartus/libraries/megafunctions/lpm_mult.tdf Line: 352
+Info (13014): Ignored 18 buffer(s)
+    Info (13016): Ignored 18 CARRY_SUM buffer(s)
+Info (13000): Registers with preset signals will power-up high File: D:/abc/fp1/Rtl/vga_pic_g.v Line: 127
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file D:/abc/fp1/Quartus_prj/output_files/DevelopmentBoard.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "B5" File: D:/abc/fp1/Rtl/Breakout_top.v Line: 9
+Info (21057): Implemented 1953 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 18 output pins
+    Info (21061): Implemented 1909 logic cells
+    Info (21062): Implemented 20 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 28 warnings
+    Info: Peak virtual memory: 4884 megabytes
+    Info: Processing ended: Sun Dec 28 02:05:05 2025
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:23
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/abc/fp1/Quartus_prj/output_files/DevelopmentBoard.map.smsg.
+
+

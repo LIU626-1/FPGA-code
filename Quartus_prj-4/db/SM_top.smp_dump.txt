@@ -1,0 +1,6 @@
+
+State Machine - |SM_top|state
+Name state.S_COLOR state.S_END state.S_MUST 
+state.S_COLOR 0 0 0 
+state.S_MUST 1 0 1 
+state.S_END 1 1 0 

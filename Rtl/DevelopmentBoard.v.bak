@@ -1,0 +1,235 @@
+//======================== DevelopmentBoard.v ========================
+`timescale 1ns/1ns
+module DevelopmentBoard(
+    input  wire        clk,      // 50MHz
+    input  wire        reset,    // 低电平复位
+    input  wire        B2,       // s=左  （按下=0）
+    input  wire        B3,       // d=右  （按下=0）
+    input  wire        B4,       // f=开始/发球（OK，按下=0）
+    input  wire        B5,       // g=重开/返回（按下=0）
+    output wire        h_sync,
+    output wire        v_sync,
+    output wire [15:0] rgb
+);
+
+    // ===== 时钟 & 复位 =====
+    wire vga_clk;
+    wire sys_rst_n = reset;   // 外部是低有效复位
+
+    pll pll_inst (
+        .sys_clk   (clk),
+        .sys_rst_n (sys_rst_n),
+        .vga_clk   (vga_clk)
+    );
+
+    // ===== VGA 控制器 =====
+    wire [9:0]  pix_x, pix_y;
+    wire [15:0] pix_data_mux;
+
+    vga_ctrl u_vga (
+        .vga_clk   (vga_clk),
+        .sys_rst_n (sys_rst_n),
+        .pix_data  (pix_data_mux),
+        .pix_x     (pix_x),
+        .pix_y     (pix_y),
+        .hsync     (h_sync),
+        .vsync     (v_sync),
+        .rgb       (rgb)
+    );
+
+    // ===== 20ms 按键去抖（在 vga_clk 域）=====
+    wire left_db, right_db, ok_db, back_db;
+
+    // 25MHz 下 20ms = 500,000，log2 ≈ 19
+    btn_debouncer #(.CNTR_MAX(500_000), .CNTR_BITS(19)) u_db_left (
+        .clk    (vga_clk),
+        .rst_n  (sys_rst_n),
+        .sig_in (~B2),           // 按下=0，取反变成“按下=1”
+        .sig_out(left_db)
+    );
+    btn_debouncer #(.CNTR_MAX(500_000), .CNTR_BITS(19)) u_db_right (
+        .clk    (vga_clk),
+        .rst_n  (sys_rst_n),
+        .sig_in (~B3),
+        .sig_out(right_db)
+    );
+    btn_debouncer #(.CNTR_MAX(500_000), .CNTR_BITS(19)) u_db_ok (
+        .clk    (vga_clk),
+        .rst_n  (sys_rst_n),
+        .sig_in (~B4),
+        .sig_out(ok_db)
+    );
+    btn_debouncer #(.CNTR_MAX(500_000), .CNTR_BITS(19)) u_db_back (
+        .clk    (vga_clk),
+        .rst_n  (sys_rst_n),
+        .sig_in (~B5),
+        .sig_out(back_db)
+    );
+
+    // ===== Moore 状态机：初始 -> 游戏 -> 结束 =====
+    localparam [1:0] S_START = 2'd0,
+                     S_GAME  = 2'd1,
+                     S_END   = 2'd2;
+
+    reg [1:0] state, state_n;
+
+    // OK / back 的“帧级”沿检测（用去抖后的电平）
+    reg ok_db_d, back_db_d;
+    always @(posedge vga_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n) begin
+            ok_db_d   <= 1'b0;
+            back_db_d <= 1'b0;
+        end else begin
+            ok_db_d   <= ok_db;
+            back_db_d <= back_db;
+        end
+    end
+    wire ok_pulse   = ok_db   & ~ok_db_d;     // 按键从 0->1 的那一拍
+    wire back_pulse = back_db & ~back_db_d;
+
+    // 游戏模块的 game_over：三滴血用完或砖块打空
+    wire game_over;
+
+    // 当前状态寄存器
+    always @(posedge vga_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n)
+            state <= S_START;
+        else
+            state <= state_n;
+    end
+
+    // Moore 状态转移：只看当前状态+输入决定下一状态
+    always @* begin
+        state_n = state;
+        case (state)
+            S_START: begin
+                if (ok_pulse)         // 初始界面按 OK 进入游戏
+                    state_n = S_GAME;
+            end
+
+            S_GAME: begin
+                if (game_over)        // 游戏结束（命用完或砖打光）-> 结束界面
+                    state_n = S_END;
+            end
+
+            S_END: begin
+                if (back_pulse)       // 结束界面按“重置键”回到初始界面
+                    state_n = S_START;
+            end
+
+            default: state_n = S_START;
+        endcase
+    end
+
+    // ===== 给游戏模块单独做一个复位：每次从 START 进入 GAME 时拉低一拍 =====
+    reg game_rst_n;
+
+    always @(posedge vga_clk or negedge sys_rst_n) begin
+        if (!sys_rst_n) begin
+            // 全局复位时，同时复位游戏模块
+            game_rst_n <= 1'b0;
+        end else if (state == S_START && ok_pulse) begin
+            // 在 START 界面按下 F 的这一拍：对游戏模块产生一个低脉冲复位
+            game_rst_n <= 1'b0;
+        end else begin
+            // 其余时间保持为 1
+            game_rst_n <= 1'b1;
+        end
+    end
+
+    // ===== 三个画面模块：开始 / 游戏 / 结束 =====
+    wire [15:0] pix_data_start;
+    wire [15:0] pix_data_game;
+    wire [15:0] pix_data_end;
+
+    // 初始界面
+    vga_pic_start u_start (
+        .vga_clk   (vga_clk),
+        .sys_rst_n (sys_rst_n),
+        .pix_x     (pix_x),
+        .pix_y     (pix_y),
+        .pix_data  (pix_data_start)
+    );
+
+    // 游戏界面（带三滴血和 game_over 输出的版本）
+    vga_pic_g u_game (
+        .vga_clk   (vga_clk),
+        .sys_rst_n (game_rst_n),   // ★ 改成用 game_rst_n
+        .pix_x     (pix_x),
+        .pix_y     (pix_y),
+        .btn_left  (left_db),
+        .btn_right (right_db),
+        .btn_ok    (ok_db),
+        .btn_back  (back_db),
+        .pix_data  (pix_data_game),
+        .game_over (game_over)
+    );
+
+    // 结束界面
+    vga_pic_end u_end (
+        .vga_clk   (vga_clk),
+        .sys_rst_n (sys_rst_n),
+        .pix_x     (pix_x),
+        .pix_y     (pix_y),
+        .pix_data  (pix_data_end)
+    );
+
+    // ===== 像素多路选择：根据状态选择哪个画面输出 =====
+    vga_pic_ctrl u_pic_ctrl (
+        .state     (state),
+        .pix_start (pix_data_start),
+        .pix_game  (pix_data_game),
+        .pix_end   (pix_data_end),
+        .pix_out   (pix_data_mux)
+    );
+
+endmodule
+
+// ============================================================================
+// 20ms 去抖：输入保持改变状态满 CNTR_MAX 个时钟后才更新输出；含两级同步
+// ============================================================================
+module btn_debouncer #(
+    parameter integer CNTR_MAX  = 500_000, // 20ms @ 25MHz
+    parameter integer CNTR_BITS = 19
+)(
+    input  wire clk,
+    input  wire rst_n,      // 低有效复位
+    input  wire sig_in,     // 原始按键（高=按下）
+    output reg  sig_out     // 去抖电平（高=按下）
+);
+    // 两级同步
+    reg s1, s2;
+    always @(posedge clk or negedge rst_n) begin
+        if(!rst_n) begin
+            s1 <= 1'b0;
+            s2 <= 1'b0;
+        end else begin
+            s1 <= sig_in;
+            s2 <= s1;
+        end
+    end
+
+    // 稳定值 + 计数
+    reg [CNTR_BITS-1:0] cnt;
+    reg stable;
+
+    always @(posedge clk or negedge rst_n) begin
+        if(!rst_n) begin
+            stable  <= 1'b0;
+            sig_out <= 1'b0;
+            cnt     <= {CNTR_BITS{1'b0}};
+        end else begin
+            if(s2 == stable) begin
+                cnt <= {CNTR_BITS{1'b0}};
+            end else begin
+                if(cnt == CNTR_MAX-1) begin
+                    stable  <= s2;
+                    sig_out <= s2;
+                    cnt     <= {CNTR_BITS{1'b0}};
+                end else begin
+                    cnt <= cnt + {{(CNTR_BITS-1){1'b0}},1'b1};
+                end
+            end
+        end
+    end
+endmodule

@@ -1,0 +1,75 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 dD:/abc/Lab1/Lab1-2/Quartus_prj/simulation/questa
+T_opt
+Z2 !s110 1758964620
+VQGlUE0FYa:2DE2LY];81H1
+04 13 4 work tb_Comparator fast 0
+=1-60e9aa9155e9-68d7ab8c-311-1328
+R0
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work +acc
+Z3 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+vComparator
+2D:/abc/Lab1/Lab1-2/Rtl/Comparator.v
+R2
+!i10b 1
+!s100 HZN8<faDdf9Xk4ja7hDHX3
+IPo=7i^BX8Bdm2aHbQ^kmZ0
+R1
+w1758963843
+8D:/abc/Lab1/Lab1-2/Rtl/Comparator.v
+FD:/abc/Lab1/Lab1-2/Rtl/Comparator.v
+!i122 0
+L0 1 14
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2023.3;77
+r1
+!s85 0
+31
+Z6 !s108 1758964620.000000
+!s107 D:/abc/Lab1/Lab1-2/Rtl/Comparator.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/Lab1/Lab1-2/Rtl|D:/abc/Lab1/Lab1-2/Rtl/Comparator.v|
+!i113 0
+Z7 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+!s92 -vlog01compat -work work +incdir+D:/abc/Lab1/Lab1-2/Rtl -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+n@comparator
+vtb_Comparator
+2D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim/tb_Comparator.v
+R2
+!i10b 1
+!s100 OiVCcRn<MzmJPLag;YK@]2
+IcE1]eBSg42P<2z1WA9`_W3
+R1
+w1758964571
+8D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim/tb_Comparator.v
+FD:/abc/Lab1/Lab1-2/Quartus_prj/../Sim/tb_Comparator.v
+!i122 1
+L0 2 38
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim/tb_Comparator.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim|D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim/tb_Comparator.v|
+!i113 0
+R7
+!s92 -vlog01compat -work work +incdir+D:/abc/Lab1/Lab1-2/Quartus_prj/../Sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+ntb_@comparator

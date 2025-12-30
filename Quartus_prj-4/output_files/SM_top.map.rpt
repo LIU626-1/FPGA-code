@@ -1,0 +1,494 @@
+Analysis & Synthesis report for SM_top
+Wed Oct 29 18:51:44 2025
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |SM_top|state
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: btn_debouncer:u_db
+ 14. Parameter Settings for User Entity Instance: vga_pic_color:u_color
+ 15. Parameter Settings for User Entity Instance: vga_pic:u_must
+ 16. Parameter Settings for User Entity Instance: vga_pic_end:u_end
+ 17. Parameter Settings for User Entity Instance: vga_ctrl:u_vga
+ 18. Post-Synthesis Netlist Statistics for Top Partition
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2024  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed Oct 29 18:51:44 2025          ;
+; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
+; Revision Name                      ; SM_top                                         ;
+; Top-level Entity Name              ; SM_top                                         ;
+; Family                             ; Cyclone IV E                                   ;
+; Total logic elements               ; 627                                            ;
+;     Total combinational functions  ; 624                                            ;
+;     Dedicated logic registers      ; 55                                             ;
+; Total registers                    ; 55                                             ;
+; Total pins                         ; 21                                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE6F17C8        ;                    ;
+; Top-level entity name                                            ; SM_top             ; SM_top             ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 16          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-16        ;   0.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                  ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path    ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+; ../Rtl/SM_top.v                  ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/SM_top.v        ;         ;
+; ../Rtl/vga_ctrl.v                ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/vga_ctrl.v      ;         ;
+; ../Rtl/vga_pic.v                 ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/vga_pic.v       ;         ;
+; ../Rtl/vga_pic_color.v           ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/vga_pic_color.v ;         ;
+; ../Rtl/vga_pic_end.v             ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/vga_pic_end.v   ;         ;
+; ../Rtl/pll.v                     ; yes             ; User Verilog HDL File  ; D:/abc/Lab4/Rtl/pll.v           ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+
+
++---------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                         ;
++---------------------------------------------+-----------------------+
+; Resource                                    ; Usage                 ;
++---------------------------------------------+-----------------------+
+; Estimated Total logic elements              ; 627                   ;
+;                                             ;                       ;
+; Total combinational functions               ; 624                   ;
+; Logic element usage by number of LUT inputs ;                       ;
+;     -- 4 input functions                    ; 449                   ;
+;     -- 3 input functions                    ; 63                    ;
+;     -- <=2 input functions                  ; 112                   ;
+;                                             ;                       ;
+; Logic elements by mode                      ;                       ;
+;     -- normal mode                          ; 560                   ;
+;     -- arithmetic mode                      ; 64                    ;
+;                                             ;                       ;
+; Total registers                             ; 55                    ;
+;     -- Dedicated logic registers            ; 55                    ;
+;     -- I/O registers                        ; 0                     ;
+;                                             ;                       ;
+; I/O pins                                    ; 21                    ;
+;                                             ;                       ;
+; Embedded Multiplier 9-bit elements          ; 0                     ;
+;                                             ;                       ;
+; Maximum fan-out node                        ; vga_pic:u_must|Add0~8 ;
+; Maximum fan-out                             ; 110                   ;
+; Total fan-out                               ; 2425                  ;
+; Average fan-out                             ; 3.36                  ;
++---------------------------------------------+-----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                  ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
+; |SM_top                    ; 624 (2)             ; 55 (3)                    ; 0           ; 0            ; 0       ; 0         ; 21   ; 0            ; |SM_top                       ; SM_top        ; work         ;
+;    |btn_debouncer:u_db|    ; 28 (28)             ; 22 (22)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|btn_debouncer:u_db    ; btn_debouncer ; work         ;
+;    |pll:pll_inst|          ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|pll:pll_inst          ; pll           ; work         ;
+;    |vga_ctrl:u_vga|        ; 102 (102)           ; 20 (20)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|vga_ctrl:u_vga        ; vga_ctrl      ; work         ;
+;    |vga_pic:u_must|        ; 275 (275)           ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|vga_pic:u_must        ; vga_pic       ; work         ;
+;    |vga_pic_color:u_color| ; 28 (28)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|vga_pic_color:u_color ; vga_pic_color ; work         ;
+;    |vga_pic_end:u_end|     ; 188 (188)           ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |SM_top|vga_pic_end:u_end     ; vga_pic_end   ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------+
+; State Machine - |SM_top|state                              ;
++---------------+---------------+-------------+--------------+
+; Name          ; state.S_COLOR ; state.S_END ; state.S_MUST ;
++---------------+---------------+-------------+--------------+
+; state.S_COLOR ; 0             ; 0           ; 0            ;
+; state.S_MUST  ; 1             ; 0           ; 1            ;
+; state.S_END   ; 1             ; 1           ; 0            ;
++---------------+---------------+-------------+--------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                            ;
++----------------------------------------------+------------------------------------------------+
+; Register name                                ; Reason for Removal                             ;
++----------------------------------------------+------------------------------------------------+
+; vga_pic_end:u_end|pix_data[0..2,6..8,12]     ; Stuck at GND due to stuck port data_in         ;
+; vga_pic:u_must|pix_data[0..2,6..8,12]        ; Stuck at GND due to stuck port data_in         ;
+; vga_pic_end:u_end|pix_data[3..5,9..11,13,14] ; Merged with vga_pic_end:u_end|pix_data[15]     ;
+; vga_pic:u_must|pix_data[3..5,9..11,13,14]    ; Merged with vga_pic:u_must|pix_data[15]        ;
+; vga_pic_color:u_color|pix_data[2]            ; Merged with vga_pic_color:u_color|pix_data[0]  ;
+; vga_pic_color:u_color|pix_data[12,14]        ; Merged with vga_pic_color:u_color|pix_data[15] ;
+; vga_pic_color:u_color|pix_data[11]           ; Merged with vga_pic_color:u_color|pix_data[13] ;
+; vga_pic_color:u_color|pix_data[7]            ; Merged with vga_pic_color:u_color|pix_data[9]  ;
+; vga_pic_color:u_color|pix_data[5,6]          ; Merged with vga_pic_color:u_color|pix_data[8]  ;
+; vga_pic_color:u_color|pix_data[1,3]          ; Merged with vga_pic_color:u_color|pix_data[4]  ;
+; Total Number of Removed Registers = 39       ;                                                ;
++----------------------------------------------+------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 55    ;
+; Number of registers using Synchronous Clear  ; 18    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 55    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 3     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; btn_debouncer:u_db|stable_level        ; 4       ;
+; btn_debouncer:u_db|stable_level_d      ; 1       ;
+; btn_debouncer:u_db|btn_sync1           ; 2       ;
+; btn_debouncer:u_db|btn_sync0           ; 1       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |SM_top|vga_ctrl:u_vga|cnt_v[6]           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |SM_top|btn_debouncer:u_db|db_cnt[14]     ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |SM_top|vga_pic_color:u_color|pix_data[9] ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |SM_top|vga_pic_color:u_color|pix_data[4] ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |SM_top|vga_ctrl:u_vga|rgb[14]            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: btn_debouncer:u_db ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; CNTR_BITS      ; 18    ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_pic_color:u_color ;
++----------------+------------------+--------------------------------+
+; Parameter Name ; Value            ; Type                           ;
++----------------+------------------+--------------------------------+
+; H_VALID        ; 1010000000       ; Unsigned Binary                ;
+; V_VALID        ; 0111100000       ; Unsigned Binary                ;
+; RED            ; 1111100000000000 ; Unsigned Binary                ;
+; ORANGE         ; 1111110000000000 ; Unsigned Binary                ;
+; YELLOW         ; 1111111111100000 ; Unsigned Binary                ;
+; GREEN          ; 0000011111100000 ; Unsigned Binary                ;
+; CYAN           ; 0000011111111111 ; Unsigned Binary                ;
+; BLUE           ; 0000000000011111 ; Unsigned Binary                ;
+; PURPPLE        ; 1111100000011111 ; Unsigned Binary                ;
+; BLACK          ; 0000000000000000 ; Unsigned Binary                ;
+; WHITE          ; 1111111111111111 ; Unsigned Binary                ;
+; GRAY           ; 1101011010011010 ; Unsigned Binary                ;
++----------------+------------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_pic:u_must ;
++----------------+------------------+-------------------------+
+; Parameter Name ; Value            ; Type                    ;
++----------------+------------------+-------------------------+
+; CHAR_B_H       ; 0010001100       ; Unsigned Binary         ;
+; CHAR_B_V       ; 0011011000       ; Unsigned Binary         ;
+; CHAR_W         ; 0100000000       ; Unsigned Binary         ;
+; CHAR_H         ; 0001000000       ; Unsigned Binary         ;
+; BLACK          ; 0000000000000000 ; Unsigned Binary         ;
+; WHITE          ; 1111111111111111 ; Unsigned Binary         ;
+; GOLDEN         ; 1111111011000000 ; Unsigned Binary         ;
+; PINK           ; 1110111000111000 ; Unsigned Binary         ;
++----------------+------------------+-------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_pic_end:u_end ;
++----------------+------------------+----------------------------+
+; Parameter Name ; Value            ; Type                       ;
++----------------+------------------+----------------------------+
+; CHAR_B_H       ; 0010001100       ; Unsigned Binary            ;
+; CHAR_B_V       ; 0011011000       ; Unsigned Binary            ;
+; CHAR_W         ; 0100000000       ; Unsigned Binary            ;
+; CHAR_H         ; 0001000000       ; Unsigned Binary            ;
+; BLACK          ; 0000000000000000 ; Unsigned Binary            ;
+; WHITE          ; 1111111111111111 ; Unsigned Binary            ;
+; GOLDEN         ; 1111111011000000 ; Unsigned Binary            ;
+; PINK           ; 1110111000111000 ; Unsigned Binary            ;
++----------------+------------------+----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vga_ctrl:u_vga ;
++----------------+------------+-------------------------------+
+; Parameter Name ; Value      ; Type                          ;
++----------------+------------+-------------------------------+
+; H_SYNC         ; 0001100000 ; Unsigned Binary               ;
+; H_TOTAL        ; 1100100000 ; Unsigned Binary               ;
+; V_SYNC         ; 0000000010 ; Unsigned Binary               ;
+; V_TOTAL        ; 1000001101 ; Unsigned Binary               ;
+; H_BACK         ; 0000101000 ; Unsigned Binary               ;
+; H_LEFT         ; 0000001000 ; Unsigned Binary               ;
+; H_VALID        ; 1010000000 ; Unsigned Binary               ;
+; V_BACK         ; 0000011001 ; Unsigned Binary               ;
+; V_TOP          ; 0000001000 ; Unsigned Binary               ;
+; V_VALID        ; 0111100000 ; Unsigned Binary               ;
++----------------+------------+-------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 21                          ;
+; cycloneiii_ff         ; 55                          ;
+;     CLR               ; 34                          ;
+;     CLR SCLR          ; 18                          ;
+;     ENA CLR           ; 3                           ;
+; cycloneiii_lcell_comb ; 626                         ;
+;     arith             ; 64                          ;
+;         2 data inputs ; 53                          ;
+;         3 data inputs ; 11                          ;
+;     normal            ; 562                         ;
+;         1 data inputs ; 11                          ;
+;         2 data inputs ; 50                          ;
+;         3 data inputs ; 52                          ;
+;         4 data inputs ; 449                         ;
+;                       ;                             ;
+; Max LUT depth         ; 17.60                       ;
+; Average LUT depth     ; 11.96                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+    Info: Processing started: Wed Oct 29 18:51:37 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SM_top -c SM_top
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 2 design units, including 2 entities, in source file /abc/lab4/rtl/sm_top.v
+    Info (12023): Found entity 1: SM_top File: D:/abc/Lab4/Rtl/SM_top.v Line: 1
+    Info (12023): Found entity 2: btn_debouncer File: D:/abc/Lab4/Rtl/SM_top.v Line: 96
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/rtl/vga_ctrl.v
+    Info (12023): Found entity 1: vga_ctrl File: D:/abc/Lab4/Rtl/vga_ctrl.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/rtl/vga_pic.v
+    Info (12023): Found entity 1: vga_pic File: D:/abc/Lab4/Rtl/vga_pic.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/rtl/vga_pic_color.v
+    Info (12023): Found entity 1: vga_pic_color File: D:/abc/Lab4/Rtl/vga_pic_color.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/rtl/vga_pic_end.v
+    Info (12023): Found entity 1: vga_pic_end File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/rtl/pll.v
+    Info (12023): Found entity 1: pll File: D:/abc/Lab4/Rtl/pll.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file /abc/lab4/developmentboard/verilog7.v
+    Info (12023): Found entity 1: DevelopmentBoard File: D:/abc/Lab4/DevelopmentBoard/Verilog7.v Line: 3
+Warning (10236): Verilog HDL Implicit Net warning at vga_ctrl.v(47): created implicit net for "rgb_valid" File: D:/abc/Lab4/Rtl/vga_ctrl.v Line: 47
+Warning (10236): Verilog HDL Implicit Net warning at vga_ctrl.v(52): created implicit net for "pix_data_req" File: D:/abc/Lab4/Rtl/vga_ctrl.v Line: 52
+Info (12127): Elaborating entity "SM_top" for the top level hierarchy
+Info (12128): Elaborating entity "pll" for hierarchy "pll:pll_inst" File: D:/abc/Lab4/Rtl/SM_top.v Line: 15
+Info (12128): Elaborating entity "btn_debouncer" for hierarchy "btn_debouncer:u_db" File: D:/abc/Lab4/Rtl/SM_top.v Line: 24
+Info (12128): Elaborating entity "vga_pic_color" for hierarchy "vga_pic_color:u_color" File: D:/abc/Lab4/Rtl/SM_top.v Line: 59
+Info (12128): Elaborating entity "vga_pic" for hierarchy "vga_pic:u_must" File: D:/abc/Lab4/Rtl/SM_top.v Line: 66
+Warning (10230): Verilog HDL assignment warning at vga_pic.v(110): truncated value with size 32 to match size of target (11) File: D:/abc/Lab4/Rtl/vga_pic.v Line: 110
+Warning (10030): Net "bmp.waddr_a" at vga_pic.v(87) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic.v Line: 87
+Warning (10030): Net "bmp.data_a" at vga_pic.v(87) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic.v Line: 87
+Warning (10030): Net "bmp.we_a" at vga_pic.v(87) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic.v Line: 87
+Info (12128): Elaborating entity "vga_pic_end" for hierarchy "vga_pic_end:u_end" File: D:/abc/Lab4/Rtl/SM_top.v Line: 73
+Warning (10230): Verilog HDL assignment warning at vga_pic_end.v(111): truncated value with size 32 to match size of target (11) File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 111
+Warning (10030): Net "bmp.waddr_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 88
+Warning (10030): Net "bmp.data_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 88
+Warning (10030): Net "bmp.we_a" at vga_pic_end.v(88) has no driver or initial value, using a default initial value '0' File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 88
+Info (12128): Elaborating entity "vga_ctrl" for hierarchy "vga_ctrl:u_vga" File: D:/abc/Lab4/Rtl/SM_top.v Line: 93
+Info (276014): Found 2 instances of uninferred RAM logic
+    Info (276007): RAM logic "vga_pic:u_must|bmp" is uninferred due to asynchronous read logic File: D:/abc/Lab4/Rtl/vga_pic.v Line: 87
+    Info (276007): RAM logic "vga_pic_end:u_end|bmp" is uninferred due to asynchronous read logic File: D:/abc/Lab4/Rtl/vga_pic_end.v Line: 88
+Info (13000): Registers with preset signals will power-up high File: D:/abc/Lab4/Rtl/SM_top.v Line: 133
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 648 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 18 output pins
+    Info (21061): Implemented 627 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 4865 megabytes
+    Info: Processing ended: Wed Oct 29 18:51:44 2025
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:15
+
+

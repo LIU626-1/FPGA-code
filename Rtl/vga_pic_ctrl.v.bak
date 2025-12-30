@@ -1,0 +1,21 @@
+`timescale 1ns/1ns
+module vga_pic_ctrl(
+    input  wire [1:0]  state,      // 0: start, 1: game, 2: end
+    input  wire [15:0] pix_start,
+    input  wire [15:0] pix_game,
+    input  wire [15:0] pix_end,
+    output reg  [15:0] pix_out
+);
+    localparam [1:0] S_START = 2'd0,
+                     S_GAME  = 2'd1,
+                     S_END   = 2'd2;
+
+    always @* begin
+        case (state)
+            S_START: pix_out = pix_start;
+            S_GAME : pix_out = pix_game;
+            S_END  : pix_out = pix_end;
+            default: pix_out = 16'h0000;
+        endcase
+    end
+endmodule

@@ -1,0 +1,75 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 dD:/abc/Lab2/Lab2-2/Quartus_prj/simulation/questa
+T_opt
+Z2 !s110 1759561766
+VZ6mhZLIKkWIEfzUnfH9OE0
+04 16 4 work tb_Running_light fast 0
+=1-60e9aa9155e9-68e0c826-21d-6290
+R0
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work +acc
+Z3 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+vRunning_light
+2D:/abc/Lab2/Lab2-2/Rtl/Running_light.v
+R2
+!i10b 1
+!s100 ]2ZEbVG2N<26M<_G;W?TC2
+I=aE2[h]=dP:ncY=n[_;6h3
+R1
+w1759559575
+8D:/abc/Lab2/Lab2-2/Rtl/Running_light.v
+FD:/abc/Lab2/Lab2-2/Rtl/Running_light.v
+!i122 0
+L0 1 29
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2023.3;77
+r1
+!s85 0
+31
+!s108 1759561765.000000
+!s107 D:/abc/Lab2/Lab2-2/Rtl/Running_light.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/Lab2/Lab2-2/Rtl|D:/abc/Lab2/Lab2-2/Rtl/Running_light.v|
+!i113 0
+Z6 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+!s92 -vlog01compat -work work +incdir+D:/abc/Lab2/Lab2-2/Rtl -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+n@running_light
+vtb_Running_light
+2D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim/tb_Running_light.v
+R2
+!i10b 1
+!s100 MJK^hRGLhWQ^a1nHFD5mA2
+I=`MUWJG=V@jShf[:LZ`CO0
+R1
+w1759483392
+8D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim/tb_Running_light.v
+FD:/abc/Lab2/Lab2-2/Quartus_prj/../Sim/tb_Running_light.v
+!i122 1
+L0 2 28
+R4
+R5
+r1
+!s85 0
+31
+!s108 1759561766.000000
+!s107 D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim/tb_Running_light.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim|D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim/tb_Running_light.v|
+!i113 0
+R6
+!s92 -vlog01compat -work work +incdir+D:/abc/Lab2/Lab2-2/Quartus_prj/../Sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+ntb_@running_light

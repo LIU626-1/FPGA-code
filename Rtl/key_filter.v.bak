@@ -1,0 +1,58 @@
+// ============================================================================
+// Simple button debounce + press pulse (teacher style)
+//  key_n    : raw key input, pressed=0, released=1
+//  key_state: debounced stable level (pressed=1, for long-press)
+//  key_flag : 1-clk pulse each confirmed press
+// ============================================================================
+`timescale 1ns/1ns
+module key_filter #(
+    parameter integer CNT_MAX   = 500_000, // 20ms @ 25MHz
+    parameter integer CNT_WIDTH = 19
+)(
+    input  wire clk,
+    input  wire rst_n,      // low active reset
+    input  wire key_n,      // raw key (press=0)
+    output reg  key_state,  // debounced key state (press=1)
+    output reg  key_flag    // 1-clk pulse on each confirmed press
+);
+
+    reg [CNT_WIDTH-1:0] cnt;   // counter
+    reg key_n_last;            // last sampled raw key
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            key_n_last <= 1'b1;            // default released
+            cnt        <= {CNT_WIDTH{1'b0}};
+            key_state  <= 1'b0;            // default not pressed
+            key_flag   <= 1'b0;
+        end else begin
+            // default no new press in this cycle
+            key_flag <= 1'b0;
+
+            if (key_n == key_n_last) begin
+                // level unchanged: keep counting
+                if (cnt < CNT_MAX - 1)
+                    cnt <= cnt + 1'b1;
+                else begin
+                    // stable for CNT_MAX cycles
+                    cnt <= {CNT_WIDTH{1'b0}};
+
+                    // raw key_n: press=0, release=1
+                    // key_state: press=1, release=0
+                    if (key_state != ~key_n) begin
+                        key_state <= ~key_n;
+
+                        // pulse only on release -> press
+                        if (~key_n == 1'b1)
+                            key_flag <= 1'b1;
+                    end
+                end
+            end else begin
+                // level just changed: restart counting
+                key_n_last <= key_n;
+                cnt        <= {CNT_WIDTH{1'b0}};
+            end
+        end
+    end
+
+endmodule

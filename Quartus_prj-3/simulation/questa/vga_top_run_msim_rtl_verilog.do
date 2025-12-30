@@ -1,0 +1,20 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vlog -vlog01compat -work work +incdir+D:/abc/Lab3/Lab3/Rtl {D:/abc/Lab3/Lab3/Rtl/pll.v}
+vlog -vlog01compat -work work +incdir+D:/abc/Lab3/Lab3/Rtl {D:/abc/Lab3/Lab3/Rtl/vga_ctrl.v}
+vlog -vlog01compat -work work +incdir+D:/abc/Lab3/Lab3/Rtl {D:/abc/Lab3/Lab3/Rtl/vga_pic.v}
+vlog -vlog01compat -work work +incdir+D:/abc/Lab3/Lab3/Rtl {D:/abc/Lab3/Lab3/Rtl/vga_top.v}
+
+vlog -vlog01compat -work work +incdir+D:/abc/Lab3/Lab3/Quartus_prj/../Sim {D:/abc/Lab3/Lab3/Quartus_prj/../Sim/tb_vga_pic.v}
+
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  tb_vga_pic
+
+add wave *
+view structure
+view signals
+run -all

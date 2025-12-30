@@ -1,0 +1,24 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/pll.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/vga_ctrl.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/vga_pic_start.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/vga_pic_g.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/vga_pic_ctrl.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/vga_pic_end.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/Breakout_top.v}
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Rtl {D:/abc/fp1/Rtl/key_filter.v}
+
+vlog -vlog01compat -work work +incdir+D:/abc/fp1/Quartus_prj/../Sim {D:/abc/fp1/Quartus_prj/../Sim/tb_vga_pic_g.v}
+
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  tb_vga_pic_g
+
+add wave *
+view structure
+view signals
+run -all

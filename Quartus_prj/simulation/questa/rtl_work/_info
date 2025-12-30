@@ -1,0 +1,242 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 dD:/abc/fp1/Quartus_prj/simulation/questa
+T_opt
+!s110 1766859180
+V6Q`_lGEMm_R[N0RSO6VPJ1
+04 13 4 work tb_key_filter fast 0
+=1-60e9aa9155e9-695021ac-ee-220c
+R0
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+vBreakout_top
+2D:/abc/fp1/Rtl/Breakout_top.v
+Z3 !s110 1766859179
+!i10b 1
+!s100 ZKPUk4OczB8j9ebm;W2oo2
+Idb1k>9OEJI910^FhiZOV63
+R1
+w1766854330
+8D:/abc/fp1/Rtl/Breakout_top.v
+FD:/abc/fp1/Rtl/Breakout_top.v
+!i122 6
+L0 3 176
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2023.3;77
+r1
+!s85 0
+31
+Z6 !s108 1766859179.000000
+!s107 D:/abc/fp1/Rtl/Breakout_top.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/Breakout_top.v|
+!i113 0
+Z7 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z8 !s92 -vlog01compat -work work +incdir+D:/abc/fp1/Rtl -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+n@breakout_top
+vkey_filter
+2D:/abc/fp1/Rtl/key_filter.v
+R3
+!i10b 1
+!s100 DBmF8hdli7e;@=R1G8ZE`1
+IS7[eQ0f5z^gVaSnED4=2V2
+R1
+w1766858692
+8D:/abc/fp1/Rtl/key_filter.v
+FD:/abc/fp1/Rtl/key_filter.v
+!i122 7
+L0 2 42
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/key_filter.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/key_filter.v|
+!i113 0
+R7
+R8
+R2
+vpll
+2D:/abc/fp1/Rtl/pll.v
+R3
+!i10b 1
+!s100 S?UW^MjleXXUk:i>nT^Z92
+INQ]8kW4mO?2mdBUKnfUP72
+R1
+w1764307223
+8D:/abc/fp1/Rtl/pll.v
+FD:/abc/fp1/Rtl/pll.v
+!i122 0
+L0 2 15
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/pll.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/pll.v|
+!i113 0
+R7
+R8
+R2
+vtb_key_filter
+2D:/abc/fp1/Quartus_prj/../Sim/tb_key_filter.v
+R3
+!i10b 1
+!s100 4zP7`=Sg[<m6dJA0]iDMD2
+I<>JMUXz`<X=TU>nN3z6hP2
+R1
+w1766858752
+8D:/abc/fp1/Quartus_prj/../Sim/tb_key_filter.v
+FD:/abc/fp1/Quartus_prj/../Sim/tb_key_filter.v
+!i122 8
+L0 2 115
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Quartus_prj/../Sim/tb_key_filter.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Quartus_prj/../Sim|D:/abc/fp1/Quartus_prj/../Sim/tb_key_filter.v|
+!i113 0
+R7
+!s92 -vlog01compat -work work +incdir+D:/abc/fp1/Quartus_prj/../Sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vvga_ctrl
+2D:/abc/fp1/Rtl/vga_ctrl.v
+R3
+!i10b 1
+!s100 AdWCkIIb9Qg[AUL^g]IAM3
+IGzXkB86^T]a7LR38OUNA33
+R1
+w1764307256
+8D:/abc/fp1/Rtl/vga_ctrl.v
+FD:/abc/fp1/Rtl/vga_ctrl.v
+!i122 1
+L0 1 48
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/vga_ctrl.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/vga_ctrl.v|
+!i113 0
+R7
+R8
+R2
+vvga_pic_ctrl
+2D:/abc/fp1/Rtl/vga_pic_ctrl.v
+R3
+!i10b 1
+!s100 jgSSHI@Ko?<<ZiQH12PT<3
+I4O=H1MQ4Hg2f5cO^z1BF?2
+R1
+w1766854274
+8D:/abc/fp1/Rtl/vga_pic_ctrl.v
+FD:/abc/fp1/Rtl/vga_pic_ctrl.v
+!i122 4
+L0 2 20
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/vga_pic_ctrl.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/vga_pic_ctrl.v|
+!i113 0
+R7
+R8
+R2
+vvga_pic_end
+2D:/abc/fp1/Rtl/vga_pic_end.v
+R3
+!i10b 1
+!s100 ]:LzGS2=mVe67?9<BG0o>0
+I7aWiHl_XAad4[:88:g@kl0
+R1
+w1764307380
+8D:/abc/fp1/Rtl/vga_pic_end.v
+FD:/abc/fp1/Rtl/vga_pic_end.v
+!i122 5
+L0 2 119
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/vga_pic_end.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/vga_pic_end.v|
+!i113 0
+R7
+R8
+R2
+vvga_pic_g
+2D:/abc/fp1/Rtl/vga_pic_g.v
+R3
+!i10b 1
+!s100 zRddXJ_:[APHaNX]4DF6E3
+I?SaPekj2=gX@o<@D46aeg2
+R1
+w1766856945
+8D:/abc/fp1/Rtl/vga_pic_g.v
+FD:/abc/fp1/Rtl/vga_pic_g.v
+!i122 3
+L0 2 285
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/vga_pic_g.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/vga_pic_g.v|
+!i113 0
+R7
+R8
+R2
+vvga_pic_start
+2D:/abc/fp1/Rtl/vga_pic_start.v
+R3
+!i10b 1
+!s100 [03NkHAm3SO3T461YSBAU2
+Ic_5Yd;?Dl?bd^XUCcO37=1
+R1
+w1766854045
+8D:/abc/fp1/Rtl/vga_pic_start.v
+FD:/abc/fp1/Rtl/vga_pic_start.v
+!i122 2
+L0 3 196
+R4
+R5
+r1
+!s85 0
+31
+R6
+!s107 D:/abc/fp1/Rtl/vga_pic_start.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/abc/fp1/Rtl|D:/abc/fp1/Rtl/vga_pic_start.v|
+!i113 0
+R7
+R8
+R2
